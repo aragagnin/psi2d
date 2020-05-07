@@ -1,0 +1,72 @@
+<!doctype html> 
+<html lang="en"> 
+<head> 
+  <meta charset="UTF-8" />
+<!--  <meta name="viewport" content="user-scalable=0">  -->
+  <title>Ψ2d</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<script>"use strict";</script>
+<!-- <script>"use strict";delete localStorage.debug;</script> -->
+
+<div id="game">
+  <canvas id="canvas" width="600" height="600" ></canvas>
+</div>
+<div id="mobileHeader" style="float:left;">
+<!--  <h3>Instructions:</h3>
+  <ul>
+    <li><b>on mobiles</b>: swipe on the lower side of canvas to move; tap on the upper side of the canvas  to shoot.</li>
+    <li><b>on desktops</b>: WAD/arrows/space to move; click to fire</li>
+  </ul>-->
+</div>
+<img src="/not_exists.png" id="img" width="0" height="0" style="float:left"/>
+<!--  <p class="middle"><b>Instructions:</b>
+  <ul>
+    <li><b>on mobiles</b>: swipe on the lower side of canvas to move; tap on the upper side of the canvas  to shoot.</li>
+    <li><b>on desktops</b>: WAD/arrows/space to move and jump; click on the canvas to fire</li>
+  </ul>
+  
+</p>
+-->
+
+<script>
+function refresh(node)
+{
+   var times = 118000; // gap in Milli Seconds; = 118seconds - we don't want to make heroku to fall asleep.
+
+   (function startRefresh()
+   {
+      var address;
+      if(node.src.indexOf('?')>-1)
+       address = node.src.split('?')[0];
+      else 
+       address = node.src;
+      node.src = address+"?time="+new Date().getTime();
+
+      setTimeout(startRefresh,times);
+   })();
+
+}
+
+refresh(document.getElementById('img'));
+</script>
+
+</body>
+	<script type="text/javascript" src="level/norequire.js"></script>
+        <script src="jquery.min.js"></script>
+        <script src="jquery.finger.js"></script>
+	<script type="text/javascript" src="level/utils.js"></script>
+	<script type="text/javascript" src="clone.js"></script>
+	<script type="text/javascript" defer src="level/elements.js"></script>
+	<script type="text/javascript" defer src="level/level.js"></script>
+	<script type="text/javascript" defer src="players/cat.js"></script>
+	<script type="text/javascript" defer src="players/dog.js"></script>
+	<script type="text/javascript" defer src="players/roby.js"></script>
+	<script type="text/javascript" defer src="players/annette.js"></script>
+	<script type="text/javascript" defer src="level/constructors.js"></script>
+	
+	<script type="text/javascript" defer src="level/client.js"></script>
+	<script type="text/javascript" defer src="level/clientmain.js"></script>
+</html>
