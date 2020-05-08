@@ -158,3 +158,4 @@ This game was made with node.js and thanks to the followsing free resources:
 - https://github.com/jakesgordon/javascript-tiny-platformer a useful game/tutorial on platform logic;
 - https://developer.valvesoftware.com/wiki/Latency_Compensating_Methods_in_Client/Server_In-game_Protocol_Design_and_Optimization a guide on how to cope with latency in fast muliplayer games.
 - http://atrevida.comprenica.com/atrtut10.html very old but interesting tutorial on how to do move sprites efficiently
+- https://code.google.com/archive/p/plar/source/default/source this is a very old (and failed) temptative of a 2D arena in Java I made in 2010
