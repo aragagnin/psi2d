@@ -32,6 +32,10 @@ and four characters.
 
 ## Game Infrastructure
 
+A sketch of the big picture of  the game's client and server routines:
+
+![sketch of game classes](https://i.imgur.com/z0pi54N.png)
+
 #### The Level
 
 Each element of a level (background blocks, ammoes, players) is a child class of `BlockBase` (see `www/level/elements.js`). 
