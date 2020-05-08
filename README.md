@@ -32,7 +32,7 @@ and four characters.
 
 ## Game Infrastructure
 
-### The Level
+#### The Level
 
 Each element of a level (background blocks, ammoes, players) is a child class of `BlockBase` (see `www/level/elements.js`). 
 All elements have a field `pos` (a 2-elements list) that stores the 2D position of the object.
@@ -69,7 +69,7 @@ The game provides various extensions of the class `BlockBase` in `www/levels/ele
 
 So far I implemented only one level (see `www/level1/*json`) with (Tiled Map Editor)[https://www.mapeditor.org] and tileset from [kenney.nl](https://kenney.nl/assets).
 
-### The Player
+#### The Player
 
 Class `Player` is the most complex object: it has a system for spriting used by the client: `sprites` store `action`-spriteslist pair.
 Method `load_sprite` will store a given sprite in the singleton `SpriteService`, the function `render` does render the player in a canvas and function `step` evolves it following the tutorial of the [tiny-platformer](https://github.com/jakesgordon/javascript-tiny-platformer). 
@@ -80,13 +80,13 @@ I implemented four players (see `www/players`): `Dog` (`www/players/dog.js`), `R
 So far all players have the same abilities. In the future I'd like to add different abilities per player.
 
 
-###  Client-Server communication
+####  Client-Server communication
 
 Client and server communicates via a websocket messages are JSON messages in the form of a list containing the name of a remote procedure call (RPC) and its JSON parameters (i.e. `[rpc_name, parameter object]`).
 For some events (see later) data is compressed, for instance the parameter pos becames `p`, and similar (see `www/level/utils.js` and function `zipTank(obj)` and `unzipTank(obj)` for all de-compressions a obj). The JSON `{pos:[1.,2.],fire:true}` may became the string `p1.&2.|f`.
 
 
-### The Server
+#### The Server
 
 The server `express` serves the static `www` folder and listening websocket (see `main.js`).
 
@@ -101,7 +101,7 @@ Every websocket message is forwarded to the `rpc_name` methods of static class `
 - `ping(obj)`: re-send the same exact object to the client via method `pong(obj)`
 
 
-### The Client
+#### The Client
 
 The client run in the JS browser, and is implemented in the class `Client` (see `www/level/client.js`). It contains a `Level` object (`this.game`, sick name), a `GUIManager` object (see next sub session) and `Interface` class that has the RPC methods corresponding to data caming from a web socket. The `Interface` has the following methods:
 - `setLevel(tank)`: a JSON serialisation of the server's main. The client will initialise a `Level` object with this data.
@@ -112,7 +112,7 @@ The client's function `getScreen()` returns all elements nearby the current play
 
 
 
-### The UI
+#### The UI
 
 The game is run from the file `play.html`, which has the canvas that shows the level's elements.
 
@@ -132,7 +132,7 @@ The "client main" equivalent is in `window.onload` that creates the websocket an
 The ws stram is piped to the `Client`'s `Interface` class in the `ws.onopen` event.
 
 
-### Installing
+## Installing
 
 Use `npm` to  install packages and run the `express` server:
 
