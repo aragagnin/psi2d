@@ -2,10 +2,11 @@
  
 Psi2d is a web-based and extendible multi-player and mobile-friendly 2D shooting game. The server is written in node.js and the client uses vanilla JS (and shares most of the code base with the client).
 
- A prototype is currently hosted and running at https://psi2d.itch.io/psi2d
+**A prototype is currently hosted at https://psi2d.itch.io/psi2d**
+
 
 ![psi2d screenshot](https://img.itch.zone/aW1hZ2UvMTg3NDkxLzMzNDU0MzAucG5n/347x500/2lsQDP.png)
-![Alt text](https://img.youtube.com/vi/qfNqr_UtGLU/0.jpg)](https://www.youtube.com/watch?v=qfNqr_UtGLU)
+[![psi2d game play](https://img.youtube.com/vi/qfNqr_UtGLU/0.jpg)](https://www.youtube.com/watch?v=qfNqr_UtGLU)
 
 ## Getting Started
 
