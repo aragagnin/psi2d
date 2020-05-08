@@ -7,13 +7,15 @@ Psi2d is a web-based and extendible multi-player and mobile-friendly 2D shooting
 Whatch a game play on youtube https://www.youtube.com/watch?v=qfNqr_UtGLU:
 [![psi2d game play](https://img.youtube.com/vi/qfNqr_UtGLU/0.jpg)](https://www.youtube.com/watch?v=qfNqr_UtGLU)
 
-## Game Rules
+## Game Details
 
 During each match (lasting 10 minutes) players run on the map and can collect life points (hearts) and ammoes (yellow circles). Player can shoot mental energy (here the name psi2d) in the form of white shells that  damage other players.
-**On mobiles:** swipe on the lower side of canvas to move and jump; tap on the upper side of the canvas to shoot.
-**On desktops:** WAD/arrows/space to move; click to fire.
 
-The game is made with node.js. With node I am able to use the same exact "game" class files (as well for all js classes of dynamic elements inside the level game) and evolve the game world both in the web browser client and in the server. The game is modular and one can easily add elements, level and player skills! I can make it open source if anyone is interested in co-operating with me
+In order to make it possible for the game to easily run on mobile browsers, this (so far: but I am open to changes) is a "one-button-game": you can run and shoot with touch only. **On mobiles:** swipe on the lower side of canvas to move and jump; tap on the upper side of the canvas to shoot. **On desktops:** WAD/arrows/space to move; click to fire.
+
+Following the guide from [valve](https://developer.valvesoftware.com/wiki/Latency_Compensating_Methods_in_Client/Server_In-game_Protocol_Design_and_Optimization), multiplayer games must cope with delays. For this reason the client must evolve the world while waiting for server's updates. For this reason the game is made with node.js. With node I am able to use the same exact "game" class files (as well for all js classes of dynamic elements inside the level game) and evolve the game world both in the web browser client and in the server. 
+
+The game is  easily expandible and it is possible to add new kind of elements, level and player skills. 
 
 So far there is only one level (made with [Tiled Map Editor](https://www.mapeditor.org) with tiles from [kenney.nl](https://kenney.nl/assets). And four characters with assets from [gameart2d.com](http://www.gameart2d.com/freebies.html)
 and four characters.
@@ -93,7 +95,7 @@ The server is capable of hosting various `rooms`, each containing a class `Game`
 Every websocket message is forwarded to the `rpc_name` methods of static class `Interface` (implemented in `game.js`), and currently supports these methods:
 
 - `joinRandom({name: player_name, class: player_class})`: join a random match
-- `join({name: player_name, class: player_class, code:code })`: join a  match with code `code`
+- `join({name: player_name, class: player_class, code:code })`: join a  match with code `code`. It calls' `setLevel(level)` to send the level to the new client.
 - `getObjects(list)`: ask for a list of objects. Reply to the client with method `newElement(list)` and `newPlayer(list)` for a list of desidered serialised elements and players
 - `event(obj)`: set properties `obj` of the current player. E.g. if `obj={fire:true, left:true, right:false}` then the associated player will fire, stop moving right and go left. Broadcast this change to the client via method `update`
 - `ping(obj)`: re-send the same exact object to the client via method `pong(obj)`
@@ -101,17 +103,42 @@ Every websocket message is forwarded to the `rpc_name` methods of static class `
 
 ### The Client
 
+The client run in the JS browser, and is implemented in the class `Client` (see `www/level/client.js`). It contains a `Level` object (`this.game`, sick name), a `GUIManager` object (see next sub session) and `Interface` class that has the RPC methods corresponding to data caming from a web socket. The `Interface` has the following methods:
+- `setLevel(tank)`: a JSON serialisation of the server's main. The client will initialise a `Level` object with this data.
+- `pong(tank)`: sent upon a `ping` request, the time delay is used to compute the lag.
+- `newPlayer(tank)` and `newElement(tank)` are sent on requests on new elements of the level, which is updated accordingly.
+
+The client's function `getScreen()` returns all elements nearby the current player. upon requestes of the `GUIManager` will evolve the level (i.e. call `level.simulateTo(new Date().getTime)`) while waiting for statyus updates of the server.
+
+
 
 ### The UI
 
+The game is run from the file `play.html`, which has the canvas that shows the level's elements.
 
+The class `GUIManager` grabs data from the `Level` inside the `Client` and paint elements around the player in the canvas.
+- `paintElement(element, context, pos)`: paint an element from the level in a given context of the canvas
+- `render()`: asks the client for all'elements nearby the player by calling `client.getScreen()` 
+- `askForUpdate()`: set up a interval of 100ms that asks for updates to the server.
+- `ping()`: set up a interval of 5000ms to periodically ping the server
+- `setKey()`: get's user' input and end it to the client
+
+The routines that grabs clicks and touches from the canvas and sends it to the `GUIManager` are in `clientmain.js`:
+- `onClick`: get clicks coordinates and ask the client to fire in that direction
+- `onTouchStart`/`onTouchMove`/`onTouchEnd`: for mobiles only, save the begining of a touch: upper part of the screen fires, lower part moves
+- `drawMobileCommand`: show a circle where the finger is touching, to help for better movement.
+
+The "client main" equivalent is in `window.onload` that creates the websocket and set click and keyboard listeners.
+The ws stram is piped to the `Client`'s `Interface` class in the `ws.onopen` event.
 
 
 ### Installing
 
-Just use `npm` to  install packages and run the `express` server
+Use `npm` to  install packages and run the `express` server:
 
     npm start
+    
+Open the browser's address `127.0.0.1:8080` to play.
 
 ## License
 
