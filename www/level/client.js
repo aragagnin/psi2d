@@ -581,7 +581,7 @@ GUIManager.prototype.setKey = function(t, k) {
     var client = this.client;
     var v = null;
     if (isString(k)) v = k
-    //    console.log('setKey',v,t)
+   //    console.log('setKey',v,t)
     if (v != null) {
 
         if (client.player[v] != t) {
