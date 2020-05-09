@@ -1,6 +1,8 @@
 # Ψ2d
  
-Psi2d is a web-based and extendible multi-player and mobile-friendly 2D shooting game. The server is written in node.js and the client uses vanilla JS (and shares most of the code base with the client).
+Psi2d is a minimal extendible multiplayer 2D platformer shooting browser game. 
+
+The server is written in node.js and the client uses vanilla JS (and shares most of the code base with the client).
 
 **A prototype is currently hosted at https://psi2d.itch.io/psi2d**
 
@@ -141,6 +143,7 @@ The ws stram is piped to the `Client`'s `Interface` class in the `ws.onopen` eve
 
 Use `npm` to  install packages and run the `express` server:
 
+    npm install
     npm start
     
 Open the browser's address `127.0.0.1:8080` to play.
