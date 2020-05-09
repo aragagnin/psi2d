@@ -7,6 +7,7 @@ Psi2d is a web-based and extendible multi-player and mobile-friendly 2D shooting
 Whatch a game play on youtube https://www.youtube.com/watch?v=qfNqr_UtGLU:
 [![psi2d game play](https://img.youtube.com/vi/qfNqr_UtGLU/0.jpg)](https://www.youtube.com/watch?v=qfNqr_UtGLU)
 
+
 ## Game Details
 
 During each match (lasting 10 minutes) players run on the map and can collect life points (hearts) and ammoes (yellow circles). Player can shoot mental energy (here the name psi2d) in the form of white shells that  damage other players.
@@ -158,4 +159,5 @@ This game was made with node.js and thanks to the followsing free resources:
 - https://github.com/jakesgordon/javascript-tiny-platformer a useful game/tutorial on platform logic;
 - https://developer.valvesoftware.com/wiki/Latency_Compensating_Methods_in_Client/Server_In-game_Protocol_Design_and_Optimization a guide on how to cope with latency in fast muliplayer games.
 - http://atrevida.comprenica.com/atrtut10.html very old but interesting tutorial on how to do move sprites efficiently
-- https://code.google.com/archive/p/plar/source/default/source this is a very old (and failed) temptative of a 2D arena in Java I made in 2010
+- https://code.google.com/archive/p/plar/source/default/source this is a very old (and failed) temptative of a 2D arena in Java I made back in  2008-2010
+- https://store.steampowered.com/app/9180/Commander_Keen/ and http://www.shikadi.net/keenwiki/NetKeen for inspiration
