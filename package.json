@@ -1,7 +1,7 @@
 {
   "name": "psyche2d",
   "version": "1.0.0",
-  "description": "Psi2d is a minimal multiplayer 2d platformer shooting  game.",
+  "description": "Psi2d is a minimal extendible multiplayer 2d platformer shooting  game",
   "scripts": {
     "start": "node main.js"
   },
