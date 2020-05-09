@@ -141,6 +141,7 @@ The ws stram is piped to the `Client`'s `Interface` class in the `ws.onopen` eve
 
 Use `npm` to  install packages and run the `express` server:
 
+    npm install
     npm start
     
 Open the browser's address `127.0.0.1:8080` to play.
